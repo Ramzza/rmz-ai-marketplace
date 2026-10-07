@@ -1,0 +1,11 @@
+{
+  "name": "rmz-ai-marketplace",
+  "owner": {
+    "name": "Ramzza"
+  },
+  "metadata": {
+    "description": "A curated marketplace of plugins for GitHub Copilot CLI.",
+    "version": "1.0.0"
+  },
+  "plugins": []
+}

@@ -1,0 +1,22 @@
+name: Validate marketplace
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-marketplace:
+    name: Validate marketplace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Install Bats
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y bats
+      - name: Run marketplace tests
+        run: bats tests/marketplace.bats
