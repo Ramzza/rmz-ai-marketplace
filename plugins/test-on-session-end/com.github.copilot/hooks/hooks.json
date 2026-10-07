@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "set -euo pipefail\n\ntests_ran=0\nif [ -f package.json ] && command -v node >/dev/null 2>&1; then\n  package_has_test=\"$(node -e 'const p=require(\"./package.json\"); process.stdout.write(String(Boolean(p.scripts && p.scripts.test)));')\"\n  if [ \"${package_has_test}\" = \"true\" ]; then\n    if [ -f pnpm-lock.yaml ]; then\n      pnpm test\n    elif [ -f yarn.lock ]; then\n      yarn test\n    elif [ -f bun.lockb ] || [ -f bun.lock ]; then\n      bun test\n    else\n      npm test\n    fi\n    tests_ran=1\n  fi\nfi\nif [ \"${tests_ran}\" -eq 0 ]; then\n  if [ -f Cargo.toml ]; then\n    cargo test\n  elif [ -f go.mod ]; then\n    go test ./...\n  elif [ -f pyproject.toml ] || [ -f pytest.ini ] || [ -f tox.ini ]; then\n    python -m pytest\n  elif [ -d tests ] && find tests -maxdepth 1 -type f -name '*.bats' -print -quit 2>/dev/null | grep -q .; then\n    bats tests\n  elif [ -f Makefile ] && grep -Eq '^[[:space:]]*test:' Makefile; then\n    make test\n  else\n    printf '%s\\n' 'No supported test command found; skipping session-end test hook.' >&2\n  fi\nfi",
+        "cwd": ".",
+        "timeoutSec": 1800
+      }
+    ]
+  }
+}

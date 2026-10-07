@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "typescript-lsp",
+  "description": "Configure TypeScript and JavaScript language-server support for Copilot CLI.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ramzza"
+  },
+  "repository": "https://github.com/Ramzza/rmz-ai-marketplace",
+  "license": "MIT",
+  "keywords": ["typescript", "javascript", "lsp"]
+}
