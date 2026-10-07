@@ -7,5 +7,24 @@
     "description": "A curated marketplace of plugins for GitHub Copilot CLI.",
     "version": "1.0.0"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "rmz-ai-skills",
+      "description": "Reusable RMZ Copilot CLI skills and their supporting resources.",
+      "version": "1.0.0",
+      "source": "plugins/rmz-ai-skills"
+    },
+    {
+      "name": "test-on-session-end",
+      "description": "Run a detected project test suite when a Copilot CLI session ends.",
+      "version": "1.0.0",
+      "source": "plugins/test-on-session-end"
+    },
+    {
+      "name": "typescript-lsp",
+      "description": "Configure TypeScript and JavaScript language-server support for Copilot CLI.",
+      "version": "1.0.0",
+      "source": "plugins/typescript-lsp"
+    }
+  ]
 }

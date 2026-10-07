@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "rmz-ai-skills",
+  "description": "Reusable RMZ Copilot CLI skills and their supporting resources.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ramzza"
+  },
+  "repository": "https://github.com/Ramzza/rmz-ai-marketplace",
+  "license": "MIT",
+  "keywords": ["rmz", "copilot", "skills"]
+}

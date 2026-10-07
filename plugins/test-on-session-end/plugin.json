@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "test-on-session-end",
+  "description": "Run a detected project test suite when a Copilot CLI session ends.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ramzza"
+  },
+  "repository": "https://github.com/Ramzza/rmz-ai-marketplace",
+  "license": "MIT",
+  "keywords": ["copilot", "hooks", "testing"]
+}
