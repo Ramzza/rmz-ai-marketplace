@@ -96,8 +96,10 @@ teardown() {
     pdftk-server \
     playwright-explore-website \
     rmz-clean-workspace \
+    rmz-commit \
     rmz-conversation-skill-curator \
     rmz-create-agentsmd \
+    rmz-create-pr \
     rmz-create-repo \
     rmz-create-repository \
     rmz-create-skill \

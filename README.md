@@ -24,7 +24,7 @@ Install the migrated RMZ skills:
 copilot plugin install rmz-ai-skills@rmz-ai-marketplace
 ```
 
-The plugin includes all skills formerly bundled in `rmz-ai-vm`, including the document-conversion, PDFtk, repository-management, and testing workflows.
+The plugin includes all skills formerly bundled in `rmz-ai-vm`, including document-conversion, PDFtk, repository-management, commit, pull-request, and testing workflows.
 
 To run the current project's tests automatically when a Copilot CLI session ends:
 
