@@ -96,8 +96,10 @@ teardown() {
     pdftk-server \
     playwright-explore-website \
     rmz-clean-workspace \
+    rmz-commit \
     rmz-conversation-skill-curator \
     rmz-create-agentsmd \
+    rmz-create-pr \
     rmz-create-repo \
     rmz-create-repository \
     rmz-create-skill \
@@ -146,6 +148,21 @@ teardown() {
   grep -Fqx \
     '6. Propose and generate test cases based on the exploration.' \
     "${playwright_skill}"
+
+  create_repo_skill="${SKILLS_DIRECTORY}/rmz-create-repo/SKILL.md"
+  grep -Fqx \
+    'Use this workflow when creating a new project repository for the user. Match the public visibility, MIT license, default-branch PR ruleset, secret scanning with push protection, and Dependabot security settings of `Ramzza/rmz-ai-vm`; read the reference'\''s current configuration instead of relying on remembered defaults.' \
+    "${create_repo_skill}"
+
+  create_skill="${SKILLS_DIRECTORY}/rmz-create-skill/SKILL.md"
+  grep -Fqx -- \
+    "- For deterministic, repeatable work, prefer scripts when they reduce token use and improve reliability. Keep supporting scripts and references inside that skill's directory, and add them only when they materially help the task." \
+    "${create_skill}"
+
+  update_skill="${SKILLS_DIRECTORY}/rmz-update-skill/SKILL.md"
+  grep -Fqx -- \
+    "- For deterministic, repeatable work, prefer scripts when they reduce token use and improve reliability. Keep supporting scripts and references inside the skill's directory, and update them only when needed for the requested change." \
+    "${update_skill}"
 }
 
 create_runner_stub() {

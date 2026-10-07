@@ -12,7 +12,7 @@ Use this skill only to update an existing skill in the `rmz-ai-skills` plugin in
 - The canonical copy of every marketplace skill is `plugins/rmz-ai-skills/skills/<skill-name>/SKILL.md`. Update that copy; do not edit only a project-local or installed copy.
 - Keep the skill directory and its `name` frontmatter value matching, concise, lowercase, and kebab-case.
 - Preserve valid YAML frontmatter with a specific `description` that says what the skill does and when Copilot should use it.
-- Keep supporting scripts and references inside the skill's directory, and update them only when needed for the requested change.
+- For deterministic, repeatable work, prefer scripts when they reduce token use and improve reliability. Keep supporting scripts and references inside the skill's directory, and update them only when needed for the requested change.
 
 ## Updating a useful skill
 
