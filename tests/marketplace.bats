@@ -3,6 +3,7 @@
 setup() {
   ROOT="$(cd "${BATS_TEST_DIRNAME}/.." && pwd)"
   MANIFEST="${ROOT}/.github/plugin/marketplace.json"
+  CLAUDE_MANIFEST="${ROOT}/.claude-plugin/marketplace.json"
   TEST_HOOK="${ROOT}/plugins/test-on-session-end/com.github.copilot/hooks/hooks.json"
   TEST_DIRECTORY="$(mktemp -d)"
   TEST_BIN="${TEST_DIRECTORY}/bin"
@@ -327,4 +328,36 @@ run_session_end_hook() {
     }
   ' "${LSP_CONFIG}"
   [ "${status}" -eq 0 ]
+}
+
+@test "MKT-008: Claude Code marketplace exposes the RMZ skills plugin" {
+  [ -f "${CLAUDE_MANIFEST}" ]
+
+  run jq -e --slurpfile copilot "${MANIFEST}" '
+    (.name == $copilot[0].name)
+    and (.owner.name | type == "string" and length > 0)
+    and (.metadata.description | type == "string" and length > 0 and length <= 1024)
+    and (.metadata.version | type == "string" and test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))
+    and (.plugins | type == "array" and length > 0)
+    and ([.plugins[].name] | length == (unique | length))
+    and ([.plugins[].name] | index("rmz-ai-skills") != null)
+    and all(.plugins[];
+      .name as $name
+      | ($copilot[0].plugins | map(select(.name == $name)) | first) as $entry
+      | $entry != null
+      and .source == ("./" + $entry.source)
+      and .version == $entry.version
+      and (.description | type == "string" and length > 0 and length <= 1024)
+      and .strict == false
+    )
+  ' "${CLAUDE_MANIFEST}"
+  [ "${status}" -eq 0 ]
+
+  while IFS= read -r source; do
+    [ -d "${ROOT}/${source}/skills" ]
+    [ ! -e "${ROOT}/${source}/.claude-plugin/plugin.json" ]
+  done < <(jq -r '.plugins[].source' "${CLAUDE_MANIFEST}")
+
+  grep -Fq 'claude plugin marketplace add Ramzza/rmz-ai-marketplace' "${ROOT}/README.md"
+  grep -Fq 'claude plugin install rmz-ai-skills@rmz-ai-marketplace' "${ROOT}/README.md"
 }
