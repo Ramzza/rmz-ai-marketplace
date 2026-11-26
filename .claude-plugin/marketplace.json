@@ -1,0 +1,19 @@
+{
+  "name": "rmz-ai-marketplace",
+  "owner": {
+    "name": "Ramzza"
+  },
+  "metadata": {
+    "description": "A curated marketplace of RMZ skills for Claude Code.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "rmz-ai-skills",
+      "description": "Reusable RMZ skills and their supporting resources.",
+      "version": "1.0.0",
+      "source": "./plugins/rmz-ai-skills",
+      "strict": false
+    }
+  ]
+}

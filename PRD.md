@@ -2,7 +2,7 @@
 
 ## Product
 
-Provide a GitHub Copilot CLI plugin marketplace hosted in this repository. The catalog distributes the skills formerly bundled in `rmz-ai-vm`, a session-end testing hook, and TypeScript/JavaScript language-server configuration.
+Provide a GitHub Copilot CLI plugin marketplace hosted in this repository, with the RMZ skills also available to Claude Code. The catalog distributes the skills formerly bundled in `rmz-ai-vm`, a session-end testing hook, and TypeScript/JavaScript language-server configuration.
 
 ## Requirements
 
@@ -13,6 +13,7 @@ Provide a GitHub Copilot CLI plugin marketplace hosted in this repository. The c
 - **MKT-005 — Migrated skills:** The `rmz-ai-skills` plugin must contain every skill and bundled resource previously distributed from `rmz-ai-vm`, with third-party license notices preserved.
 - **MKT-006 — Session-end test hook:** The `test-on-session-end` plugin must run a detected project test command from Copilot CLI's `sessionEnd` hook, report when no supported test command exists, and propagate test failures.
 - **MKT-007 — TypeScript LSP:** The `typescript-lsp` plugin must configure `typescript-language-server` for TypeScript and JavaScript file extensions supported by Copilot CLI.
+- **MKT-008 — Claude Code skills:** Claude Code must find a marketplace manifest at `.claude-plugin/marketplace.json` with the same marketplace name. It must list `rmz-ai-skills` from the same plugin directory and version as the Copilot CLI catalog, so both tools load one skill tree. The README must document how to add the marketplace and install the plugin with Claude Code.
 
 ## Verification
 
@@ -25,3 +26,4 @@ Provide a GitHub Copilot CLI plugin marketplace hosted in this repository. The c
 | MKT-005 | `tests/marketplace.bats`: complete migrated skill list, resources, and license notice |
 | MKT-006 | `tests/marketplace.bats`: session-end hook structure, test-runner selection, no-test behavior, and failure propagation |
 | MKT-007 | `tests/marketplace.bats`: TypeScript/JavaScript LSP command and extension mappings |
+| MKT-008 | `tests/marketplace.bats`: Claude Code manifest, shared skills plugin source and version, and install instructions |

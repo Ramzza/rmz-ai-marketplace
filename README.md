@@ -1,6 +1,6 @@
 # rmz-ai-marketplace
 
-A curated marketplace of plugins for GitHub Copilot CLI.
+A curated marketplace of plugins for GitHub Copilot CLI. The RMZ skills plugin is also available to Claude Code.
 
 ## Add the marketplace
 
@@ -43,11 +43,23 @@ npm install -g typescript typescript-language-server
 
 Restart Copilot CLI or run `/lsp reload` after installing the language server.
 
+## Use the skills in Claude Code
+
+Claude Code reads `.claude-plugin/marketplace.json`, which lists the `rmz-ai-skills` plugin from the same `plugins/rmz-ai-skills` directory as Copilot CLI:
+
+```shell
+claude plugin marketplace add Ramzza/rmz-ai-marketplace
+claude plugin install rmz-ai-skills@rmz-ai-marketplace
+```
+
+The session-end hook and TypeScript LSP plugins use Copilot-specific configuration and are only listed for Copilot CLI.
+
 ## Contribute a plugin
 
 1. Add an Agent Plugins 1.0 plugin under `plugins/<name>/`, including the root `plugin.json` manifest. Put Copilot-specific hooks and LSP configuration under `com.github.copilot/`.
 2. Add an entry to `.github/plugin/marketplace.json` with a unique kebab-case `name`, `description`, semantic `version`, and `source` pointing to the plugin directory (for example, `plugins/my-plugin`).
-3. Run the marketplace tests:
+3. To publish a skills-only plugin to Claude Code as well, add a matching entry to `.claude-plugin/marketplace.json` with `source` set to `./plugins/<name>` and `strict` set to `false`.
+4. Run the marketplace tests:
 
    ```shell
    bats tests/marketplace.bats
